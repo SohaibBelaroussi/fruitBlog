@@ -1,5 +1,5 @@
 # Brief
 
-change background to #FFB6C1
+Verify issue 1 (background #FFB6C1) is correctly implemented on this branch; fix anything missing. If already correct, say so in your verdict.
 
-(issue: 1 · pipeline: implement · run: e71c6d8b-18e7-4dd7-a35a-c53af4d0a234)
+(issue: 1 · pipeline: implement · run: 7a421fc5-69fe-473f-b5e3-504ae34b21eb)
