@@ -23,3 +23,11 @@ out of scope for this issue.
 
 ## Risks
 - Low risk: single-property, single-file change. No JS or markup impacted.
+
+## Cap gate test note
+Per the "cap gate test" brief, followed the test procedure exactly:
+1. Called ask_human: "Which color do you prefer, red or blue?" — human answered "blue".
+2. Called ask_human again: "And which fruit do you prefer?" — this call did NOT pause;
+   it returned immediately with a cap error instead of prompting the human:
+   "ask_human cap reached for this step — no more questions allowed. Decide yourself and proceed (or finish with an honest verdict)."
+3. Per instructions, did not retry and finished immediately with verdict status done.
