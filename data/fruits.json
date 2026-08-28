@@ -1,0 +1,52 @@
+[
+  {
+    "name": "Orange",
+    "season": "Winter",
+    "description": "A sweet, juicy citrus fruit packed with Vitamin C."
+  },
+  {
+    "name": "Lemon",
+    "season": "Winter",
+    "description": "A tart citrus fruit prized for cooking, drinks, and cleaning."
+  },
+  {
+    "name": "Lime",
+    "season": "Summer",
+    "description": "A small, tangy citrus fruit that brightens dishes and beverages."
+  },
+  {
+    "name": "Mango",
+    "season": "Summer",
+    "description": "A sweet, creamy tropical fruit often called the king of fruits."
+  },
+  {
+    "name": "Pineapple",
+    "season": "Summer",
+    "description": "A sweet and tangy tropical fruit rich in the enzyme bromelain."
+  },
+  {
+    "name": "Strawberry",
+    "season": "Spring",
+    "description": "A sweet, heart-shaped berry loaded with Vitamin C and antioxidants."
+  },
+  {
+    "name": "Blueberry",
+    "season": "Summer",
+    "description": "A tiny, antioxidant-rich berry known for supporting brain health."
+  },
+  {
+    "name": "Grape",
+    "season": "Fall",
+    "description": "A sweet, juicy fruit that grows in clusters and contains resveratrol."
+  },
+  {
+    "name": "Cherry",
+    "season": "Summer",
+    "description": "A small stone fruit, sweet or tart, rich in antioxidants."
+  },
+  {
+    "name": "Peach",
+    "season": "Summer",
+    "description": "A soft, sweet stone fruit high in Vitamin C and beta-carotene."
+  }
+]
