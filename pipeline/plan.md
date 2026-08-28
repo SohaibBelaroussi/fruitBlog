@@ -19,62 +19,81 @@ text content changes.
   started → what drives us [3 cards] → commitment → join community →
   closing).
 
-## Proposed copy (before → after)
+## Human feedback (round 1) and how it was addressed
 
-1. `<h1>Our Mission</h1>` → `<h1>Our Mission (Besides Eating All the Fruit)</h1>`
+Human chose: "Approve but tone it down a bit (less jokey) - keep it playful
+without going full comedian, and skip the emoji (drop the 🍓 in the
+closing)."
+
+Addressed by: rewriting every line below to drop the joke/gag-style lines
+(e.g. "crime against snacking", "juice dripping down your chin", "dragon
+fruit" bit, "lonely banana", "fair warning... boring snacks") in favor of
+warm, lightly whimsical phrasing — playful word choice and a bit of energy,
+but no punchlines or stand-up-style jokes. Removed the 🍓 emoji from the
+closing line entirely (footer's existing 🍎 in the logo/nav is unrelated
+and untouched).
+
+## Final copy (before → after)
+
+1. `<h1>Our Mission</h1>` → `<h1>Our Mission, Fruit First</h1>`
 
 2. Mission box:
    - h2: "We Love Fruits & Want to Spread Knowledge" →
-     "We're Fruit-Obsessed and Not Even Sorry"
-   - p: → "Let's be honest: we could talk about fruit all day. It's nature's
-     candy, edible confetti, and a tiny vitamin bomb all rolled into one.
-     We're here to share that joy — juice dripping down your chin optional."
+     "We Love Fruit, and We Love Sharing It"
+   - p: → "Our passion for fruit goes beyond just how delicious it tastes.
+     To us, fruit is one of nature's best ideas — a little burst of
+     nutrition, color, and joy in every bite, and we can't wait to share
+     that with you."
 
 3. "Why We Started This Blog" section:
    - h2 stays "Why We Started This Blog"
-   - p: → "Here's the thing: too many people are out there living
-     bland, fruit-less lives, and it's a crime against snacking. We started
-     this blog because <span class="highlight">everyone deserves to know
-     just how amazing fruit can be</span>. Consider this our juicy public
-     service announcement."
+   - p: → "We started this blog because we believe
+     <span class=\"highlight\">fruit knowledge should be easy to find and
+     fun for everyone</span>. Too often, people miss out on the good stuff
+     fruit has to offer simply because nobody told them. Our mission is to
+     change that."
 
 4. "What Drives Us" section (h2 stays), 3 cards:
-   - Card 1 h3 stays "🌱 Health & Wellness"; p → "Fruit is basically a
-     tiny superhero in a colorful cape. It powers you up, fights off the
-     sniffles, and gives you the kind of energy coffee only wishes it had."
-   - Card 2 h3 stays "🌍 Environmental Awareness"; p → "Good news: loving
-     fruit means loving the planet too. It's a win-win so satisfying we
-     want to shout it from the orchard rooftops."
-   - Card 3 h3 stays "📚 Education"; p → "Ever wonder what a dragon fruit
-     actually tastes like? Same. We're on a mission to turn fruit-curious
-     folks into fruit-fluent ones, one fun fact at a time."
+   - Card 1 h3 stays "🌱 Health & Wellness"; p → "Fruit is a natural energy
+     boost with benefits built right in — better health, a stronger
+     immune system, and the kind of everyday vitality that's hard to
+     bottle."
+   - Card 2 h3 stays "🌍 Environmental Awareness"; p → "Fruit is about as
+     sustainable and eco-friendly as food gets, which means every piece
+     you enjoy is good for you and good for the planet."
+   - Card 3 h3 stays "📚 Education"; p → "There's a whole world of flavors
+     out there waiting to be discovered. We love helping people make
+     smarter, tastier choices — and maybe find a new favorite fruit along
+     the way."
 
 5. "Our Commitment" (h2 stays):
-   - p → "We promise to keep things accurate, helpful, and just a little
-     bit silly. Whether you're a die-hard health nut, a curious snacker, or
-     someone whose fruit bowl is currently just a lonely banana, we've got
-     you covered."
+   - p → "We're committed to sharing information about fruit that's
+     accurate, helpful, and genuinely enjoyable to read. Whether you're a
+     longtime health enthusiast, a curious food lover, or just starting
+     your journey toward healthier eating, we want to be your go-to source
+     for all things fruit."
 
 6. "Join Our Community" (h2 stays):
-   - p → "Fair warning: our love of fruit is contagious. Once you discover
-     how ridiculously good (and good for you) fruit can be, there's no
-     going back to boring snacks."
+   - p → "Our love for fruit tends to rub off on people, and we like it
+     that way. Once you see how much fruit has to offer — in flavor,
+     variety, and everyday goodness — it's easy to want more of it in your
+     life."
 
 7. `intro-section`:
-   - h3: "Together, We Can Make a Difference" → "Together, We're Building
-     a Fruit-Loving Revolution"
-   - p1 → "Every smoothie shared, every weird new fruit tried, every friend
-     converted from chip-lover to cherry-lover — it all adds up. You're not
-     just snacking, you're part of the mission."
+   - h3: "Together, We Can Make a Difference" → "Together, We Can Spread
+     the Fruit Love"
+   - p1 → "Sharing knowledge about fruit isn't just about facts and
+     figures — it's about helping people live healthier, happier lives.
+     Every person who learns something new about fruit, and passes it on,
+     helps us get a little closer to our mission."
    - p2 (highlight span): "Thank you for being part of our fruit-loving
-     community!" → "Thanks for being here — you're officially one of us
-     now. 🍓"
+     community!" → "Thanks for being part of our fruit-loving community —
+     we're glad you're here!" (no emoji)
 
 8. Footer:
    - "Spreading the love of fruits, one bite at a time." → "Spreading the
-     love of fruit, one delicious bite at a time." (keep `id="copyright-year"`
-     span untouched; only the trailing tagline text may loosen slightly if
-     it reads more natural, otherwise leave as-is)
+     love of fruit, one bite at a time." (minor grammar tweak only; keep
+     `id="copyright-year"` span untouched)
 
 ## Files touched
 - `mission.html` (copy only)
