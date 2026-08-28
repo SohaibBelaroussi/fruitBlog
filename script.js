@@ -1,4 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
+    const copyrightYear = document.getElementById('copyright-year');
+    if (copyrightYear) {
+        copyrightYear.textContent = new Date().getFullYear();
+    }
+
     const navLinks = document.querySelectorAll('nav a');
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
 

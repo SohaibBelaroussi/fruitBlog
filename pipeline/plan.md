@@ -68,7 +68,25 @@ Two ways to proceed, depending on what the human wants:
 - Low risk either way. Option A is a pure no-op. Option B touches four files
   but is additive and narrowly scoped to the copyright year only.
 
-## Open question for human approval
-Which option should I implement — A (no changes, footer already satisfies
-the issue) or B (make the copyright year dynamic as a small correctness
-fix)?
+## Decision
+Human approved **Option B**: make the copyright year dynamic.
+
+## Implementation (completed)
+- `index.html`, `fruits.html`, `mission.html` — wrapped the year in the
+  existing footer paragraph as `<span id="copyright-year">2024</span>`,
+  keeping `2024` as static fallback markup/no-JS text, identical across all
+  three pages.
+- `script.js` — added, at the top of the existing `DOMContentLoaded`
+  handler, a lookup of `#copyright-year` and, if present,
+  `copyrightYear.textContent = new Date().getFullYear();` so the footer
+  always shows the current year without further edits.
+- No CSS changes needed — the `footer` rule already styles the `<p>` content
+  regardless of the inner `<span>`.
+
+## Verification
+- No automated test suite exists in this repo (static site, no
+  package.json/test runner). Verified by inspection:
+  - All three pages have matching footer markup with the new span.
+  - `script.js` sets `#copyright-year` text on `DOMContentLoaded`, guarded by
+    an existence check so it's a no-op if the element is ever removed.
+  - `git diff --stat` shows only the four intended files changed.
