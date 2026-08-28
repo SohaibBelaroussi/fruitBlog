@@ -27,9 +27,21 @@ nav {
     padding: 0 2rem;
 }
 
+.brand {
+    display: flex;
+    flex-direction: column;
+}
+
 .logo {
     font-size: 1.5rem;
     font-weight: bold;
+}
+
+.tagline {
+    font-size: 0.75rem;
+    font-weight: normal;
+    color: rgba(255, 255, 255, 0.75);
+    margin: 0.15rem 0 0;
 }
 
 nav ul {
