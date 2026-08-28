@@ -1,5 +1,5 @@
 # Brief
 
-Verify issue 1 (background #FFB6C1) is correctly implemented on this branch; fix anything missing. If already correct, say so in your verdict.
+cap gate test - follow your behavior prompt exactly
 
-(issue: 1 · pipeline: implement · run: 7a421fc5-69fe-473f-b5e3-504ae34b21eb)
+(issue: none · pipeline: ask-cap-test · run: 2b1c41e4-1ab0-4c2b-8313-38e9a93e4c21)
