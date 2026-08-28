@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://sohaibtaqat.github.io/fruitBlog/sitemap.xml
