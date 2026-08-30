@@ -35,89 +35,105 @@
             </p>
         </div>
 
-        <h2>Citrus Fruits</h2>
-        <p>
-            Citrus fruits are known for their high <span class="highlight">Vitamin C</span> content and refreshing taste.
-            They're perfect for boosting your immune system and adding zest to your day.
-        </p>
-
-        <div class="fruit-grid">
-            <div class="fruit-card">
-                <h3>🍊 Oranges</h3>
-                <p>Sweet and juicy, oranges are packed with Vitamin C and folate. Perfect for breakfast or a healthy snack.</p>
-            </div>
-            <div class="fruit-card">
-                <h3>🍋 Lemons</h3>
-                <p>Tart and refreshing, lemons are great for cooking, drinks, and their natural cleansing properties.</p>
-            </div>
-            <div class="fruit-card">
-                <h3>🍈 Limes</h3>
-                <p>Small but mighty, limes add a burst of flavor to dishes and drinks while providing essential nutrients.</p>
-            </div>
+        <div class="search-section" role="search">
+            <label for="fruit-search" class="search-label">Search fruits</label>
+            <input type="search" id="fruit-search" class="search-input" placeholder="Search fruits by name or description..." autocomplete="off">
+            <p id="search-results-count" class="search-results-count" aria-live="polite"></p>
         </div>
 
-        <h2>Tropical Fruits</h2>
-        <p>
-            Tropical fruits bring exotic flavors and are often rich in vitamins, minerals, and antioxidants.
-            These fruits thrive in warm, humid climates and offer unique taste experiences.
-        </p>
+        <p id="no-results-message" class="no-results" hidden>No fruits found matching your search.</p>
 
-        <div class="fruit-grid">
-            <div class="fruit-card">
-                <h3>🥭 Mangoes</h3>
-                <p>Known as the "king of fruits," mangoes are sweet, creamy, and loaded with Vitamin A and C.</p>
-            </div>
-            <div class="fruit-card">
-                <h3>🍍 Pineapples</h3>
-                <p>Sweet and tangy, pineapples contain bromelain, an enzyme that aids digestion and reduces inflammation.</p>
-            </div>
-            <div class="fruit-card">
-                <h3>🥥 Coconuts</h3>
-                <p>Versatile and nutritious, coconuts provide healthy fats, fiber, and electrolytes for hydration.</p>
-            </div>
-        </div>
+        <section class="fruit-category">
+            <h2>Citrus Fruits</h2>
+            <p>
+                Citrus fruits are known for their high <span class="highlight">Vitamin C</span> content and refreshing taste.
+                They're perfect for boosting your immune system and adding zest to your day.
+            </p>
 
-        <h2>Berries</h2>
-        <p>
-            Berries are small but packed with powerful antioxidants, vitamins, and fiber.
-            They're often called <span class="highlight">superfruits</span> due to their exceptional nutritional value.
-        </p>
+            <div class="fruit-grid">
+                <div class="fruit-card">
+                    <h3>🍊 Oranges</h3>
+                    <p>Sweet and juicy, oranges are packed with Vitamin C and folate. Perfect for breakfast or a healthy snack.</p>
+                </div>
+                <div class="fruit-card">
+                    <h3>🍋 Lemons</h3>
+                    <p>Tart and refreshing, lemons are great for cooking, drinks, and their natural cleansing properties.</p>
+                </div>
+                <div class="fruit-card">
+                    <h3>🍈 Limes</h3>
+                    <p>Small but mighty, limes add a burst of flavor to dishes and drinks while providing essential nutrients.</p>
+                </div>
+            </div>
+        </section>
 
-        <div class="fruit-grid">
-            <div class="fruit-card">
-                <h3>🍓 Strawberries</h3>
-                <p>Sweet and heart-shaped, strawberries are rich in Vitamin C and antioxidants that support heart health.</p>
-            </div>
-            <div class="fruit-card">
-                <h3>🫐 Blueberries</h3>
-                <p>Tiny but mighty, blueberries are loaded with antioxidants that support brain health and memory.</p>
-            </div>
-            <div class="fruit-card">
-                <h3>🍇 Grapes</h3>
-                <p>Sweet and juicy, grapes contain resveratrol, a powerful antioxidant that supports heart health.</p>
-            </div>
-        </div>
+        <section class="fruit-category">
+            <h2>Tropical Fruits</h2>
+            <p>
+                Tropical fruits bring exotic flavors and are often rich in vitamins, minerals, and antioxidants.
+                These fruits thrive in warm, humid climates and offer unique taste experiences.
+            </p>
 
-        <h2>Stone Fruits</h2>
-        <p>
-            Stone fruits have a hard pit or "stone" in their center and are typically sweet and juicy.
-            They're excellent sources of vitamins and minerals.
-        </p>
+            <div class="fruit-grid">
+                <div class="fruit-card">
+                    <h3>🥭 Mangoes</h3>
+                    <p>Known as the "king of fruits," mangoes are sweet, creamy, and loaded with Vitamin A and C.</p>
+                </div>
+                <div class="fruit-card">
+                    <h3>🍍 Pineapples</h3>
+                    <p>Sweet and tangy, pineapples contain bromelain, an enzyme that aids digestion and reduces inflammation.</p>
+                </div>
+                <div class="fruit-card">
+                    <h3>🥥 Coconuts</h3>
+                    <p>Versatile and nutritious, coconuts provide healthy fats, fiber, and electrolytes for hydration.</p>
+                </div>
+            </div>
+        </section>
 
-        <div class="fruit-grid">
-            <div class="fruit-card">
-                <h3>🍑 Cherries</h3>
-                <p>Sweet or tart, cherries are rich in antioxidants and may help reduce inflammation and improve sleep.</p>
+        <section class="fruit-category">
+            <h2>Berries</h2>
+            <p>
+                Berries are small but packed with powerful antioxidants, vitamins, and fiber.
+                They're often called <span class="highlight">superfruits</span> due to their exceptional nutritional value.
+            </p>
+
+            <div class="fruit-grid">
+                <div class="fruit-card">
+                    <h3>🍓 Strawberries</h3>
+                    <p>Sweet and heart-shaped, strawberries are rich in Vitamin C and antioxidants that support heart health.</p>
+                </div>
+                <div class="fruit-card">
+                    <h3>🫐 Blueberries</h3>
+                    <p>Tiny but mighty, blueberries are loaded with antioxidants that support brain health and memory.</p>
+                </div>
+                <div class="fruit-card">
+                    <h3>🍇 Grapes</h3>
+                    <p>Sweet and juicy, grapes contain resveratrol, a powerful antioxidant that supports heart health.</p>
+                </div>
             </div>
-            <div class="fruit-card">
-                <h3>🍑 Peaches</h3>
-                <p>Soft and sweet, peaches are high in Vitamin C and beta-carotene, supporting skin and eye health.</p>
+        </section>
+
+        <section class="fruit-category">
+            <h2>Stone Fruits</h2>
+            <p>
+                Stone fruits have a hard pit or "stone" in their center and are typically sweet and juicy.
+                They're excellent sources of vitamins and minerals.
+            </p>
+
+            <div class="fruit-grid">
+                <div class="fruit-card">
+                    <h3>🍑 Cherries</h3>
+                    <p>Sweet or tart, cherries are rich in antioxidants and may help reduce inflammation and improve sleep.</p>
+                </div>
+                <div class="fruit-card">
+                    <h3>🍑 Peaches</h3>
+                    <p>Soft and sweet, peaches are high in Vitamin C and beta-carotene, supporting skin and eye health.</p>
+                </div>
+                <div class="fruit-card">
+                    <h3>🍇 Plums</h3>
+                    <p>Juicy and flavorful, plums are rich in vitamins and antioxidants that support digestive health.</p>
+                </div>
             </div>
-            <div class="fruit-card">
-                <h3>🍇 Plums</h3>
-                <p>Juicy and flavorful, plums are rich in vitamins and antioxidants that support digestive health.</p>
-            </div>
-        </div>
+        </section>
     </main>
 
     <footer>

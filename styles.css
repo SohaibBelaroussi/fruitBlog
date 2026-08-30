@@ -102,6 +102,49 @@ p {
     border-radius: 10px;
 }
 
+.search-section {
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.search-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #228B22;
+}
+
+.search-input {
+    width: 100%;
+    max-width: 500px;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    font-family: inherit;
+    border: 2px solid #228B22;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.search-input:focus {
+    border-color: #DC143C;
+    box-shadow: 0 0 0 3px rgba(220, 20, 60, 0.15);
+}
+
+.search-results-count {
+    margin: 0.5rem 0 0;
+    font-size: 0.9rem;
+    color: black;
+}
+
+.no-results {
+    text-align: center;
+    padding: 2rem;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    font-size: 1.1rem;
+}
+
 .fruit-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
