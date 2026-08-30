@@ -36,6 +36,34 @@
                 and we'll get back to you as soon as we can.
             </p>
         </div>
+
+        <div class="newsletter-section">
+            <h2>Stay in the Loop</h2>
+            <p>Subscribe for occasional fruity updates — new posts, seasonal picks, no spam.</p>
+
+            <form id="newsletter-form" class="newsletter-form" novalidate>
+                <label for="newsletter-email" class="search-label">Email address</label>
+                <div class="newsletter-fields">
+                    <input
+                        type="email"
+                        id="newsletter-email"
+                        name="email"
+                        class="search-input"
+                        placeholder="you@example.com"
+                        autocomplete="email"
+                        required
+                    >
+                    <button type="submit" class="button">Subscribe</button>
+                </div>
+                <p class="newsletter-error" id="newsletter-error" role="alert" hidden>
+                    Please enter a valid email address.
+                </p>
+            </form>
+
+            <p class="newsletter-success" id="newsletter-success" role="status" hidden>
+                🎉 Thanks for subscribing! Keep an eye on your inbox for fruity updates.
+            </p>
+        </div>
     </main>
 
     <footer>

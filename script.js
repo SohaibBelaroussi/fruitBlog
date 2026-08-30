@@ -70,6 +70,43 @@ document.addEventListener('DOMContentLoaded', function() {
         fruitSearchInput.addEventListener('input', filterFruits);
     }
 
+    const newsletterForm = document.getElementById('newsletter-form');
+    if (newsletterForm) {
+        const newsletterEmail = document.getElementById('newsletter-email');
+        const newsletterError = document.getElementById('newsletter-error');
+        const newsletterSuccess = document.getElementById('newsletter-success');
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        newsletterForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const email = newsletterEmail.value.trim();
+            const isValid = emailPattern.test(email);
+
+            if (!isValid) {
+                if (newsletterError) {
+                    newsletterError.hidden = false;
+                }
+                newsletterEmail.focus();
+                return;
+            }
+
+            if (newsletterError) {
+                newsletterError.hidden = true;
+            }
+            newsletterForm.hidden = true;
+            if (newsletterSuccess) {
+                newsletterSuccess.hidden = false;
+            }
+        });
+
+        newsletterEmail.addEventListener('input', function() {
+            if (newsletterError && !newsletterError.hidden) {
+                newsletterError.hidden = true;
+            }
+        });
+    }
+
     const missionBox = document.querySelector('.mission-box');
     if (missionBox) {
         missionBox.addEventListener('click', function() {

@@ -198,6 +198,47 @@ p {
     color: white;
 }
 
+.newsletter-section {
+    text-align: center;
+    margin: 3rem 0;
+    padding: 2rem;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+}
+
+.newsletter-fields {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 1rem;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.newsletter-fields .search-input {
+    max-width: none;
+}
+
+.newsletter-fields .button {
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    font-family: inherit;
+    white-space: nowrap;
+}
+
+.newsletter-error {
+    margin: 0.75rem 0 0;
+    color: #DC143C;
+    font-weight: bold;
+}
+
+.newsletter-success {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #228B22;
+}
+
 footer {
     background-color: black;
     color: white;
@@ -222,5 +263,9 @@ footer {
 
     .fruit-grid {
         grid-template-columns: 1fr;
+    }
+
+    .newsletter-fields {
+        flex-direction: column;
     }
 }
