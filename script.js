@@ -31,6 +31,37 @@ document.addEventListener('DOMContentLoaded', function() {
         const resultsCount = document.getElementById('search-results-count');
         const noResultsMessage = document.getElementById('no-results-message');
 
+        fruitCategories.forEach(category => {
+            category.querySelectorAll('.fruit-card h3').forEach(nameEl => {
+                nameEl.dataset.originalName = nameEl.textContent;
+            });
+        });
+
+        const escapeHtml = function(text) {
+            return text
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        };
+
+        const highlightMatch = function(text, query) {
+            if (query === '') {
+                return escapeHtml(text);
+            }
+
+            const matchIndex = text.toLowerCase().indexOf(query);
+            if (matchIndex === -1) {
+                return escapeHtml(text);
+            }
+
+            const before = text.slice(0, matchIndex);
+            const match = text.slice(matchIndex, matchIndex + query.length);
+            const after = text.slice(matchIndex + query.length);
+
+            return `${escapeHtml(before)}<mark class="search-match">${escapeHtml(match)}</mark>${escapeHtml(after)}`;
+        };
+
         const filterFruits = function() {
             const query = fruitSearchInput.value.trim().toLowerCase();
             let totalVisible = 0;
@@ -40,11 +71,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 let visibleInCategory = 0;
 
                 cards.forEach(card => {
-                    const name = card.querySelector('h3').textContent.toLowerCase();
+                    const nameEl = card.querySelector('h3');
+                    const originalName = nameEl.dataset.originalName;
+                    const name = originalName.toLowerCase();
                     const description = card.querySelector('p').textContent.toLowerCase();
                     const matches = query === '' || name.includes(query) || description.includes(query);
 
                     card.hidden = !matches;
+                    nameEl.innerHTML = highlightMatch(originalName, query);
                     if (matches) {
                         visibleInCategory++;
                     }

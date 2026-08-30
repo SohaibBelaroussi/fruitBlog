@@ -54,18 +54,24 @@ behavior of the existing search changes.
 - `styles.css` — `.search-match` style
 
 ## Test strategy
-No test runner in this repo (static HTML/CSS/JS, no `package.json`). Plan:
-- `node --check script.js` to catch syntax errors.
-- Manually trace `highlightMatch`/`escapeHtml` against known card names for
-  a few queries: partial match ("ora" → `<mark>` around "Ora" in "Oranges"),
-  case-insensitive match ("MANGO" matches "Mangoes" preserving original
-  casing in the mark), a card that matches only via description (no
-  highlight applied to its name), empty query (name renders plain, no
-  `<mark>`), and query cleared after a match (name resets cleanly, no
-  leftover `<mark>`).
-- Serve the site locally (`python3 -m http.server`) and spot check the
-  fruits page in a browser-like fetch, verifying the emoji prefix in each
-  `<h3>` is left untouched by highlighting.
+No test runner in this repo (static HTML/CSS/JS, no `package.json`). Ran:
+- `node --check script.js` — passes, no syntax errors.
+- Extracted `escapeHtml`/`highlightMatch` and ran them under `node -e` against
+  real card names: `highlightMatch('🍊 Oranges', 'ora')` →
+  `🍊 <mark class="search-match">Ora</mark>nges`;
+  `highlightMatch('🥭 Mangoes', 'mango')` →
+  `🥭 <mark class="search-match">Mango</mark>es` (case preserved from the
+  original name even though the query was lowercased);
+  `highlightMatch('🍇 Grapes', '')` → unchanged, no `<mark>`;
+  `highlightMatch('🍑 Cherries', 'xyz')` → unchanged, no `<mark>`. Confirms
+  the emoji prefix is always left untouched and the description-only-match
+  case (no substring in the name) falls back to plain text.
+- Verified via `grep` that `.fruit-category`/`#fruit-search` only exist on
+  `fruits.html`, so the new caching/highlight code (guarded by
+  `if (fruitSearchInput)`) cannot affect `.fruit-card` usage on
+  `glossary.html`, `index.html`, `mission.html`, or `news.html`.
+- No local browser available in this environment to screenshot; logic was
+  verified directly instead (see above).
 
 ## Risks
 - Must not touch the emoji in `<h3>` — since we highlight against
