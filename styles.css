@@ -185,6 +185,21 @@ p {
     background-color: #228B22;
 }
 
+.fruit-card ul,
+.fruit-card ol {
+    margin: 0 0 1rem 1.5rem;
+}
+
+.fruit-card li {
+    margin-bottom: 0.35rem;
+    font-size: 1.1rem;
+}
+
+.fruit-card ul:last-child,
+.fruit-card ol:last-child {
+    margin-bottom: 0;
+}
+
 .mission-box {
     background-color: #228B22;
     color: white;
