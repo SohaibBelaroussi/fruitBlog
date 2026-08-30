@@ -25,6 +25,51 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    const fruitSearchInput = document.getElementById('fruit-search');
+    if (fruitSearchInput) {
+        const fruitCategories = document.querySelectorAll('.fruit-category');
+        const resultsCount = document.getElementById('search-results-count');
+        const noResultsMessage = document.getElementById('no-results-message');
+
+        const filterFruits = function() {
+            const query = fruitSearchInput.value.trim().toLowerCase();
+            let totalVisible = 0;
+
+            fruitCategories.forEach(category => {
+                const cards = category.querySelectorAll('.fruit-card');
+                let visibleInCategory = 0;
+
+                cards.forEach(card => {
+                    const name = card.querySelector('h3').textContent.toLowerCase();
+                    const description = card.querySelector('p').textContent.toLowerCase();
+                    const matches = query === '' || name.includes(query) || description.includes(query);
+
+                    card.hidden = !matches;
+                    if (matches) {
+                        visibleInCategory++;
+                    }
+                });
+
+                category.hidden = visibleInCategory === 0;
+                totalVisible += visibleInCategory;
+            });
+
+            if (noResultsMessage) {
+                noResultsMessage.hidden = !(query !== '' && totalVisible === 0);
+            }
+
+            if (resultsCount) {
+                if (query === '') {
+                    resultsCount.textContent = '';
+                } else {
+                    resultsCount.textContent = `${totalVisible} fruit${totalVisible === 1 ? '' : 's'} found`;
+                }
+            }
+        };
+
+        fruitSearchInput.addEventListener('input', filterFruits);
+    }
+
     const missionBox = document.querySelector('.mission-box');
     if (missionBox) {
         missionBox.addEventListener('click', function() {
