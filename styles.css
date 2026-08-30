@@ -213,6 +213,34 @@ p {
     color: white;
 }
 
+.recipe-of-week {
+    background-color: #228B22;
+    color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.recipe-of-week h2,
+.recipe-of-week h3 {
+    color: white;
+}
+
+.recipe-of-week h3 {
+    margin-top: 0.5rem;
+}
+
+.recipe-of-week p {
+    color: white;
+    max-width: 500px;
+    margin: 0 auto 1.5rem;
+}
+
+.recipe-of-week .button:hover {
+    background-color: black;
+}
+
 footer {
     background-color: black;
     color: white;

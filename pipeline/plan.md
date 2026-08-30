@@ -43,6 +43,21 @@ suite or CI config (verified: no `package.json`, no test files, no
 - Double check the featured recipe's title/ingredient text matches
   `recipes.html` exactly, so the teaser never contradicts the full page.
 
+## Verification performed
+- Plan approved by human operator via `ask_human` before implementation.
+- Served the site locally with a small Node static file server and fetched
+  `index.html` — confirmed the new `.recipe-of-week` section renders with
+  the correct title, ingredient line, and a link to `recipes.html`.
+- Fetched `recipes.html` and confirmed it returns 200 (link target exists).
+- Fetched `styles.css` and confirmed the new `.recipe-of-week` rules are
+  present.
+- No headless browser (chromium) was available in this sandbox, so a
+  rendered screenshot could not be captured; verification relied on served
+  HTML/CSS content plus manual review of markup and existing CSS patterns
+  (`.mission-box` was used as the styling template).
+- No automated test suite or CI exists in this repo (static site, no
+  `package.json`/test files/workflow configs), consistent with the plan.
+
 ## Risks
 - Low risk, isolated change to one page + stylesheet addition.
 - Content drift risk: if `recipes.html`'s recipes change later, the
