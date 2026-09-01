@@ -165,6 +165,37 @@ p {
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
+.season-badge {
+    display: inline-block;
+    margin-bottom: 0.75rem;
+    padding: 0.2rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.season-badge.season-winter {
+    background-color: #E3F2FD;
+    color: #1565C0;
+}
+
+.season-badge.season-spring {
+    background-color: #E8F5E9;
+    color: #2E7D32;
+}
+
+.season-badge.season-summer {
+    background-color: #FFF3E0;
+    color: #E65100;
+}
+
+.season-badge.season-fall {
+    background-color: #EFEBE9;
+    color: #6D4C41;
+}
+
 .highlight {
     color: #DC143C;
     font-weight: bold;
