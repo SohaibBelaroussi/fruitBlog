@@ -1,92 +1,96 @@
-# Review — Dark mode toggle (issue #49)
+# Review — Dark mode toggle (issue #49), attempt 2
 
-## Verdict: reject
+## Verdict: done
 
-Implementation is complete and closely follows plan.md (CSS variables, warm dark
-palette, `.theme-toggle` + `.nav-right` on all 8 pages, no-flash inline script
-before the stylesheet link, localStorage persistence, plain JS in script.js —
-no libraries). However, the dark-mode accent color creates WCAG-failing
-contrast on several interactive elements that use white/near-white text on top
-of it, which contradicts the brief's explicit "warm and readable" requirement.
-Must-fix item below before merge.
+This is a re-review after the prior rejection ("Fix dark-mode contrast on
+accent backgrounds", commit `bfb53cd`). The fix directly and correctly
+addresses the sole must-fix item from the previous review, and I independently
+recomputed the WCAG contrast ratios rather than trusting the commit message's
+numbers — they check out.
 
-## Findings (most severe first)
+## Verification of the fix
 
-### 1. [Must fix] Dark-mode accent color fails contrast on interactive elements with white/near-white text
-- `styles.css:8` (`--color-accent: #DC143C` light) vs `styles.css:23`
-  (`--color-accent: #ff6f59` dark) — the dark accent was brightened, but it is
-  also used as a *background* with light text on top in several places, and
-  brightening it away from the light-mode value actually **reduced** contrast
-  there:
-  - `styles.css:100` `nav a:hover, nav a.active { background-color:
-    var(--color-accent); }` combined with `nav a { color: var(--color-header-text); }`
-    (`styles.css:91`) — in dark mode this is `#ff6f59` bg / `#f6ede1` text ≈
-    **2.36:1** contrast (light mode was `#DC143C`/`white` ≈ 4.99:1). This is
-    the *current page* nav link (`class="active"`, persistently visible on
-    every page, not just a hover state), so this is a standing readability
-    regression, not a transient one.
-  - `styles.css:237-246` `.button { background-color: var(--color-accent);
-    color: white; }` — dark mode ≈ **2.74:1**. Used e.g. on `404.html:44`
-    ("🏠 Back to Home"), a primary CTA.
-  - `styles.css:248-250` `.button:hover { background-color:
-    var(--color-heading); }` (`#e8a96a` in dark) with the same hardcoded
-    `color: white` ≈ **2.04:1**.
-  - All three fall well below WCAG AA (needs ≥3:1 for large/bold text, ≥4.5:1
-    for normal text) and are a clear regression from the light theme's
-    passing ~5:1. The brief explicitly asks the dark palette to be
-    "warm and readable" — these elements are the opposite for the theme's
-    signature accent color.
-  - Suggested direction (not prescriptive): either give `.button`/`nav
-    a:hover,.active` a themed, darker text color in dark mode (e.g. reuse
-    `--color-bg` or a dedicated `--color-on-accent` variable) instead of
-    hardcoded `white`, or pick a less-bright dark-mode accent that still
-    meets ≥4.5:1 against `--color-header-text`/white.
+- `styles.css` now defines `--color-on-accent: white` in `:root` and
+  `--color-on-accent: var(--color-bg)` in `[data-theme="dark"]`, and both
+  flagged spots (`nav a:hover`/`nav a.active` at ~line 100-103, `.button` at
+  ~line 237-243) use `color: var(--color-on-accent)` instead of a hardcoded
+  `white`. `.button:hover` (line ~250) inherits it since only
+  `background-color` changes there.
+- Recomputed contrast (WCAG relative-luminance formula) independently of the
+  commit message's claims:
+  - Dark mode `nav a.active`/`:hover`: `#ff6f59` bg vs `#241a16` text ≈
+    **6.21:1** (was ~2.36:1) — passes AA and AAA for normal text.
+  - Dark mode `.button:hover`: `#e8a96a` bg vs `#241a16` text ≈ **8.35:1**
+    (was ~2.04:1) — passes AA/AAA.
+  - Light mode `.button`/`nav a.active`: `#DC143C` bg vs `white` text ≈
+    **4.99:1** — unchanged from before the fix, confirms no light-mode
+    regression.
+- `grep -n "color: white" styles.css` now returns nothing — the two hardcoded
+  instances the previous review flagged are gone, and no new hardcoded
+  light-only text color was introduced elsewhere.
+- Scope of the fix is minimal and correct: `--color-accent` itself (used as
+  text/border color for `h3`, `.highlight`, focus border, card left-border)
+  was deliberately left untouched, since those weren't part of the finding
+  and were already high-contrast.
 
-## Minor / optional (not blocking)
+## Completeness against brief / plan.md
 
-### 2. Toggle icon lags behind the (correctly flash-free) color theme on load
-`script.js` (theme-toggle click handler / initial `syncToggle` call) only runs
-on `DOMContentLoaded`, and `script.js` is loaded at the very end of `<body>`
-(see e.g. `index.html:116`). The inline head script correctly prevents a
-*color* flash, but on a slow load the toggle button will briefly show the
-default 🌙 even when dark mode is already active, until `script.js` executes.
-Very low impact, but could be avoided by also setting the initial icon
-server-side... not worth blocking on given "a few lines of JS" scope.
+- Toggle in the header on every page: `grep -l theme-toggle *.html` and
+  `grep -l localStorage *.html` both return 8/8
+  (`index/fruits/recipes/glossary/mission/contact/news/404.html`), including
+  both nav variants (`.brand` wrapper and bare `.logo`, e.g. `404.html`,
+  `glossary.html`) — verified via diff, identical pattern in each.
+- `nav` still has exactly two flex children per page (brand/logo vs. the new
+  `.nav-right` wrapping `<ul>` + toggle button), so the existing
+  `justify-content: space-between` layout is preserved — no visual regression
+  to the nav structure.
+- Persistence: `script.js`'s click handler calls
+  `localStorage.setItem('theme', nextTheme)`; each page's inline head script
+  reads `localStorage.getItem('theme')` first, falling back to
+  `prefers-color-scheme: dark`, then `document.documentElement`.
+- No-flash: the inline script is a synchronous IIFE placed before the
+  `styles.css` `<link>` in every page's `<head>`, setting `data-theme` before
+  first paint — correct approach, verified present and correctly positioned
+  in `index.html` and `404.html` (checked directly; pattern identical across
+  all 8 via diff stats).
+- Plain CSS + vanilla JS only: no new dependencies; `script.js` adds one
+  self-contained block (~19 lines) that mirrors the existing style in the
+  file (`DOMContentLoaded`, `getElementById`, plain event listeners).
+- Warm, readable dark palette: near-black warm `#241a16` bg, warm off-white
+  `#f1e4da`/`#f6ede1` text, warm dark green header `#1d3320`, warm coral
+  accent `#ff6f59`, warm brown-orange heading `#e8a96a` — no cold
+  blue-grays, no pure black/white. Base text/bg/header/footer contrast is
+  strong (double digits), and the two previously-failing accent-background
+  cases now pass AA as shown above.
+- Toggle button: `type="button"`, `aria-label`, `aria-pressed`, icon
+  (🌙/☀️) kept in sync by `script.js`'s `syncToggle`, called once on load and
+  again on every click.
 
-### 3. No error handling around `localStorage` access
-The inline no-flash script and the click handler (e.g. `index.html:8-14`,
-`script.js` toggle handler) call `localStorage.getItem`/`setItem` directly. In
-environments where storage access throws (privacy modes, sandboxed iframes),
-the inline script would throw and the rest of that `<script>` block would
-abort — theme would silently fall back to default light CSS rather than
-crashing the page. Low risk, optional hardening, not required by the brief.
+## Minor / optional (not blocking, carried over from prior review, still true)
 
-### 4. Focus-ring color not re-themed
-`styles.css:195` `.search-input:focus { box-shadow: 0 0 0 3px rgba(220, 20,
-60, 0.15); }` is hardcoded to the light-mode crimson rather than
-`var(--color-accent)`, so in dark mode the focus ring tint doesn't match the
-brighter `#ff6f59` accent used elsewhere. Purely cosmetic, very low severity.
+These were correctly judged non-blocking last time and remain so — the brief
+asks for "a few lines of JS," and none of these affect correctness or the
+"warm and readable" requirement:
 
-## What looks good
-- All 8 pages (`index.html`, `fruits.html`, `recipes.html`, `glossary.html`,
-  `mission.html`, `contact.html`, `news.html`, `404.html`) have identical
-  `.theme-toggle`/`.nav-right` markup and the inline no-flash script placed
-  before the stylesheet `<link>`, matching plan.md exactly. Verified
-  `grep -l theme-toggle *.html` and the localStorage read both count 8/8.
-- `nav` still has exactly two flex children per page (brand/logo vs.
-  `.nav-right`), so `justify-content: space-between` layout is preserved.
-- CSS variable refactor is thorough — no leftover hardcoded theme colors
-  found outside the `:root`/`[data-theme="dark"]` blocks and the two
-  isolated cases above; `styles.css` braces are balanced (46/46).
-- Light-mode palette is visually unchanged (only variable substitution, same
-  hex values).
-- Dark palette is genuinely warm (no cold blue-grays, no pure black/white)
-  and base text/background/header/footer contrast ratios are strong
-  (11.7–14.8:1).
-- No-flash approach (synchronous inline script, before CSS load, falling
-  back to `prefers-color-scheme`) is correct and matches the plan's rationale
-  for why it can't live in the deferred `script.js`.
-- Toggle button has proper `aria-label`, `aria-pressed`, `type="button"`, and
-  JS keeps them in sync with the applied theme.
-- No new dependencies; vanilla JS/CSS only, consistent with the existing code
-  style in the file.
+- Toggle icon can lag one frame behind the (flash-free) color theme on slow
+  loads, since `script.js` runs at `DOMContentLoaded` while the color is set
+  synchronously in `<head>`. Cosmetic only.
+- No try/catch around `localStorage` calls; would silently fall back to
+  default light theme in environments where storage throws (private/sandboxed
+  contexts) rather than crash. Optional hardening.
+- `.search-input:focus` box-shadow (`styles.css` ~line 209) still hardcodes
+  `rgba(220, 20, 60, 0.15)` (the light-mode crimson) rather than deriving
+  from `var(--color-accent)`, so the focus-ring tint doesn't shift with the
+  brighter dark-mode accent. Purely cosmetic, not a contrast/readability
+  issue since it's a low-opacity outer glow, not text-on-background.
+
+## What looks good (unchanged from before, reconfirmed)
+
+- CSS variable refactor is thorough and consistent; light-mode palette is
+  pixel-identical to before the change.
+- Dark palette is genuinely warm and the base contrast is strong.
+- All 8 pages updated uniformly; no unintended changes outside the dark-mode
+  feature scope (diff is limited to the 8 HTML files, `styles.css`,
+  `script.js`, and pipeline artifacts).
+
+No further changes required before merge.
