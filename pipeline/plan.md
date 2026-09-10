@@ -92,3 +92,38 @@ vanilla JS only, no libraries or build step — this is a static HTML site
 - Flash of wrong theme if the inline script is placed after something
   render-blocking runs first — mitigated by putting it early in `<head>`,
   before the stylesheet `<link>`.
+
+## Revision 2 — addressing review rejection
+
+The first attempt was rejected: `styles.css` used the dark-mode accent
+`#ff6f59` as a *background* with hardcoded `color: white` (or the light
+header-text variable) on top, in three places — `nav a:hover`/`nav
+a.active` (styles.css:100), `.button` and `.button:hover`
+(styles.css:237-250). Brightening the dark accent for legibility as
+plain text had, as a side effect, dropped its contrast as a *background*
+against light text to ~2.0-2.7:1, well under WCAG AA, contradicting the
+brief's "warm and readable" requirement.
+
+Fix: introduced a themed `--color-on-accent` custom property instead of
+picking a less-vivid accent (which would have diluted the warm palette
+everywhere `--color-accent` is used as text, e.g. `h3`, `.highlight`).
+- `:root`: `--color-on-accent: white` — unchanged behavior in light mode
+  (`#DC143C` bg / white text ≈ 4.99:1, same as before).
+- `[data-theme="dark"]`: `--color-on-accent: var(--color-bg)` — reuses
+  the warm near-black `#241a16` already defined for the dark background,
+  so no new hardcoded hex value. Against `#ff6f59` this is ≈ 6.2:1;
+  against `.button:hover`'s `var(--color-heading)` (`#e8a96a`) it's
+  ≈ 8.35:1 — both comfortably pass WCAG AA (and are close to/over AAA)
+  for normal-size text.
+- Applied `color: var(--color-on-accent)` to `nav a:hover`/`nav
+  a.active` and replaced `.button`'s hardcoded `color: white` with the
+  same variable; `.button:hover` inherits it (only its background
+  changes).
+- Left `--color-accent` itself untouched (`h3`, `.highlight`, focus
+  border, card left-border all use it as text/border color on the dark
+  page/card background, which was already high-contrast and not part of
+  the finding) — scoped the fix to exactly the flagged
+  accent-as-background cases.
+- Verified `styles.css` braces stay balanced (46/46) and no other
+  `color: white`/hardcoded light-mode-only text color remains next to a
+  `background-color: var(--color-accent)` rule.

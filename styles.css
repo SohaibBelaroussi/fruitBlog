@@ -6,6 +6,7 @@
     --color-tagline: rgba(255, 255, 255, 0.75);
     --color-heading: #228B22;
     --color-accent: #DC143C;
+    --color-on-accent: white;
     --color-card-bg: #f8f8f8;
     --color-footer-bg: black;
     --color-footer-text: white;
@@ -21,6 +22,7 @@
     --color-tagline: rgba(246, 237, 225, 0.7);
     --color-heading: #e8a96a;
     --color-accent: #ff6f59;
+    --color-on-accent: var(--color-bg);
     --color-card-bg: #34261f;
     --color-footer-bg: #1a1210;
     --color-footer-text: #f1e4da;
@@ -99,6 +101,7 @@ nav a {
 nav a:hover,
 nav a.active {
     background-color: var(--color-accent);
+    color: var(--color-on-accent);
 }
 
 .theme-toggle {
@@ -237,7 +240,7 @@ p {
 .button {
     display: inline-block;
     background-color: var(--color-accent);
-    color: white;
+    color: var(--color-on-accent);
     text-decoration: none;
     padding: 0.75rem 1.5rem;
     border-radius: 5px;
