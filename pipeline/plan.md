@@ -74,6 +74,28 @@ no package.json). Verification will be:
   check on `index.html` and one other page to confirm the toggle
   opens/closes and `aria-expanded` flips.
 
+## Implementation notes / testing performed
+- Plan approved by human via `ask_human` before implementation began.
+- Implemented as three commits: nav-toggle CSS (`styles.css`), toggle
+  behavior JS (`script.js`), and the `<button class="nav-toggle">` +
+  `id="primary-nav"` markup applied identically across all 8 HTML pages.
+- No test framework exists in this repo, so verification was manual:
+  - `node -c script.js` — syntax check passes.
+  - Grepped all 8 pages to confirm the toggle button and `id="primary-nav"`
+    are present with identical attributes/structure.
+  - Counted `<button>`/`</button>` and `<ul>`/`</ul>` per file to confirm
+    tags stay balanced (recipes.html's extra `<ul>` pairs are pre-existing
+    ingredient lists, unrelated to the nav).
+  - Read through the final `styles.css` to confirm the new
+    `@media (max-width: 640px)` block is ordered after the existing
+    `@media (max-width: 768px)` block, so at widths ≤640px the newer rules
+    win on `nav`/`nav ul` (row layout + toggle visible + collapsible list).
+  - No headless browser / `jsdom` / `playwright` was available in this
+    sandbox (no network access to install them), so an actual rendered
+    click-through could not be executed here; the CSS/JS were reasoned
+    through directly instead. Recommend a quick manual resize check in a
+    real browser during review.
+
 ## Risks
 - Breakpoint interaction between the existing 768px block and the new 640px
   block — mitigated by ordering the 640px block after it so its rules win.
