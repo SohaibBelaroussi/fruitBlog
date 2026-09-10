@@ -63,6 +63,43 @@ nav a.active {
     background-color: #DC143C;
 }
 
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: 2px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 0;
+    flex-shrink: 0;
+}
+
+.nav-toggle-bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background-color: white;
+    border-radius: 2px;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
 main {
     max-width: 1200px;
     margin: 2rem auto;
@@ -237,5 +274,39 @@ footer {
 
     .fruit-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0;
+    }
+
+    .nav-toggle {
+        display: flex;
+    }
+
+    nav ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        gap: 0;
+        margin-top: 1rem;
+    }
+
+    nav ul.nav-open {
+        display: flex;
+    }
+
+    nav ul li {
+        width: 100%;
+    }
+
+    nav a {
+        display: block;
     }
 }
