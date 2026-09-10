@@ -4,6 +4,25 @@ document.addEventListener('DOMContentLoaded', function() {
         copyrightYear.textContent = new Date().getFullYear();
     }
 
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+        const syncToggle = function(theme) {
+            const isDark = theme === 'dark';
+            themeToggle.textContent = isDark ? '☀️' : '🌙';
+            themeToggle.setAttribute('aria-pressed', String(isDark));
+            themeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+        };
+
+        syncToggle(document.documentElement.getAttribute('data-theme'));
+
+        themeToggle.addEventListener('click', function() {
+            const nextTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', nextTheme);
+            localStorage.setItem('theme', nextTheme);
+            syncToggle(nextTheme);
+        });
+    }
+
     const navLinks = document.querySelectorAll('nav a');
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
 
