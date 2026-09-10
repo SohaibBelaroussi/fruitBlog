@@ -200,6 +200,60 @@ p {
     margin-bottom: 0;
 }
 
+.spotlight {
+    background: linear-gradient(135deg, #228B22, #1a6b1a);
+    color: white;
+    border-radius: 10px;
+    padding: 2rem;
+    margin: 2rem 0 3rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+.spotlight-badge {
+    display: inline-block;
+    background-color: #DC143C;
+    color: white;
+    font-weight: bold;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.9rem;
+    border-radius: 999px;
+    margin-bottom: 1.25rem;
+}
+
+.spotlight-content {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.spotlight-emoji {
+    font-size: 4rem;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.spotlight-details h2 {
+    color: white;
+    margin: 0 0 0.5rem;
+}
+
+.spotlight-season {
+    display: inline-block;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 0.25rem 0.85rem;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-bottom: 0.75rem;
+}
+
+.spotlight-details p {
+    color: white;
+    margin-bottom: 0;
+}
+
 .mission-box {
     background-color: #228B22;
     color: white;
@@ -237,5 +291,10 @@ footer {
 
     .fruit-grid {
         grid-template-columns: 1fr;
+    }
+
+    .spotlight-content {
+        flex-direction: column;
+        text-align: center;
     }
 }

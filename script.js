@@ -70,6 +70,51 @@ document.addEventListener('DOMContentLoaded', function() {
         fruitSearchInput.addEventListener('input', filterFruits);
     }
 
+    const spotlight = document.getElementById('fruit-of-the-month');
+    if (spotlight) {
+        const emojiByFruit = {
+            Orange: '🍊',
+            Lemon: '🍋',
+            Lime: '🍈',
+            Mango: '🥭',
+            Pineapple: '🍍',
+            Strawberry: '🍓',
+            Blueberry: '🫐',
+            Grape: '🍇',
+            Cherry: '🍒',
+            Peach: '🍑'
+        };
+
+        const emojiEl = document.getElementById('fotm-emoji');
+        const nameEl = document.getElementById('fotm-name');
+        const seasonEl = document.getElementById('fotm-season');
+        const descriptionEl = document.getElementById('fotm-description');
+
+        fetch('data/fruits.json')
+            .then(response => response.json())
+            .then(fruits => {
+                if (!Array.isArray(fruits) || fruits.length === 0) {
+                    throw new Error('No fruit data available');
+                }
+
+                // Deterministic pick: current calendar month (0-11) wraps
+                // around the fruit list, so the same fruit always shows for
+                // a given month.
+                const monthIndex = new Date().getMonth();
+                const fruit = fruits[monthIndex % fruits.length];
+
+                if (emojiEl) emojiEl.textContent = emojiByFruit[fruit.name] || '🍉';
+                if (nameEl) nameEl.textContent = fruit.name;
+                if (seasonEl) seasonEl.textContent = `Peak season: ${fruit.season}`;
+                if (descriptionEl) descriptionEl.textContent = fruit.description;
+            })
+            .catch(() => {
+                if (nameEl) nameEl.textContent = "This Month's Fruit";
+                if (seasonEl) seasonEl.textContent = '';
+                if (descriptionEl) descriptionEl.textContent = "We couldn't load this month's featured fruit. Check back soon!";
+            });
+    }
+
     const missionBox = document.querySelector('.mission-box');
     if (missionBox) {
         missionBox.addEventListener('click', function() {
