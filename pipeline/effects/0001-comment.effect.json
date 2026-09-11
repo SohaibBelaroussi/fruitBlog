@@ -1,0 +1,9 @@
+{
+  "kind": "github.comment",
+  "params": {
+    "issueNumber": 3,
+    "body": "The weekly scan finished."
+  },
+  "rationale": "tell the issue thread",
+  "idempotencyKey": "selftest-1"
+}
