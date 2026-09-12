@@ -1,0 +1,8 @@
+{
+  "kind": "github.comment",
+  "params": {
+    "issueNumber": 3,
+    "body": "again"
+  },
+  "idempotencyKey": "selftest-4"
+}
