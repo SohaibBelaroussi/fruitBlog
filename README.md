@@ -29,3 +29,8 @@ changes ship and be evaluated without anyone reading too much into it.
 
 In short: it looks like a blog about fruit, but the fruit is the disguise
 and the experimentation is the point.
+
+## About this site
+
+fruitBlog is a static HTML demo site about fruits, used for testing
+tooling.
